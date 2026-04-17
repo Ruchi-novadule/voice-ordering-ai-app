@@ -7,27 +7,30 @@
             margin: 0;
             font-family: Arial;
             background: linear-gradient(to right, #667eea, #764ba2);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
             background: white;
             padding: 30px;
             border-radius: 15px;
-            width: 420px;
-            text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        h2 {
-            color: #333;
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 15px;
         }
 
         button {
-            padding: 10px 15px;
+            padding: 10px 18px;
             margin: 8px;
             border: none;
             border-radius: 8px;
@@ -51,8 +54,9 @@
         }
 
         .status {
-            margin-top: 10px;
+            text-align: center;
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
         .listening {
@@ -63,17 +67,22 @@
             color: red;
         }
 
-        .section {
-            margin-top: 15px;
-            text-align: left;
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
         .box {
             background: #f4f4f4;
-            padding: 10px;
-            border-radius: 8px;
-            min-height: 40px;
+            padding: 15px;
+            border-radius: 10px;
+            min-height: 100px;
             white-space: pre-line;
+        }
+
+        .full {
+            grid-column: span 2;
         }
 
         .loader {
@@ -91,34 +100,41 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
     </style>
 </head>
 
 <body>
 
 <div class="container">
-    <h2>🍔 Food Ordering App</h2>
+    <h1>🍔 Food Ordering App</h1>
 
-    <button class="start-btn" onclick="startListening()">🎤 Start</button>
-    <button class="stop-btn" onclick="stopListening()">❌ Stop</button>
+    <div class="controls">
+        <button class="start-btn" onclick="startListening()">🎤 Start</button>
+        <button class="stop-btn" onclick="stopListening()">❌ Stop</button>
+    </div>
 
     <div class="status stopped" id="status">🔴 Not Listening</div>
 
     <div class="loader" id="loader"></div>
 
-    <div class="section">
-        <h4>📝 Your Speech:</h4>
-        <div class="box" id="output"></div>
-    </div>
+    <div class="grid">
 
-    <div class="section">
-        <h4>🍽️ Matched Items:</h4>
-        <div class="box" id="result"></div>
-    </div>
+        <div>
+            <h3>📝 Your Speech</h3>
+            <div class="box" id="output"></div>
+        </div>
 
-    <div class="section">
-        <h4>🧾 Order Summary:</h4>
-        <div class="box" id="summary"></div>
+        <div>
+            <h3>🍽️ Matched Items</h3>
+            <div class="box" id="result"></div>
+        </div>
+
+        <div class="full">
+            <h3>🧾 Order Summary</h3>
+            <div class="box" id="summary"></div>
+        </div>
+
     </div>
 </div>
 
@@ -175,7 +191,6 @@ function sendToBackend(text) {
     })
     .then(res => res.json())
     .then(data => {
-
         showLoader(false);
 
         document.getElementById("result").innerText =

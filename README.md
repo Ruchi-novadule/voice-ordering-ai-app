@@ -63,7 +63,7 @@ voice-ordering-app/
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/voice-ordering-ai-app.git
+git clone https://github.com/Ruchi-novadule/voice-ordering-ai-app.git
 cd voice-ordering-ai-app
 2️⃣ Install Dependencies
 pip install -r requirements.txt
@@ -103,12 +103,15 @@ Gradient background
 Animated buttons
 Loading spinner
 Live listening status indicator
+
 📸 Screenshots
-
-(Add later)
-
+### 🖥️ UI
 ![UI](images/ui.png)
+
+### 📊 Output
 ![Output](images/output.png)
+
+
 🔥 Future Enhancements
 🔊 Voice Output (AI speaks response)
 📱 Mobile Responsive Design
