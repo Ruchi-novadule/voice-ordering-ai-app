@@ -1,28 +1,30 @@
-# 🎤 AI Voice Ordering System for Restaurants
+# 🍔 AI Food Ordering App (Voice-Based)
 
-An intelligent voice-based food ordering system that allows users to place orders using natural language speech. The system converts speech to text in real-time, matches user intent with menu items using NLP techniques, and generates an order summary with pricing.
+An intelligent and interactive **voice-powered food ordering system** that allows users to place orders using natural speech. The system converts speech to text in real-time, matches it with menu items, and generates an order summary with pricing.
 
 ---
 
 ## 🚀 Features
 
-- 🎤 Real-time Speech-to-Text (like Siri)
-- 🧠 Smart Item Matching (NLP-based)
-- 🔤 Typo Handling & Keyword Mapping
+- 🎤 Real-time Voice Input (Speech-to-Text)
+- 🧠 Smart Item Matching (NLP-based logic)
 - 🔢 Quantity Detection (e.g., "two burgers")
 - 🧾 Order Summary Generation
 - 💰 Automatic Price Calculation
-- ⚡ Fast Response using optimized logic
-- 🌐 Simple Web Interface
+- 🎨 Professional UI (Centered + Colorful + Animated)
+- 🔄 Loading Spinner for better UX
+- 🟢 Live Listening Indicator
+- ❌ Stop Button (Control voice input)
+- ⚡ Fast & Lightweight System
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML, JavaScript (Web Speech API)
+- **Frontend:** HTML, CSS, JavaScript (Web Speech API)
 - **Backend:** FastAPI (Python)
-- **AI/NLP:** Rule-based + Regex + Matching Logic
-- **Database:** JSON (Menu storage)
+- **Logic:** Regex + Rule-Based NLP
+- **Database:** JSON (Menu Data)
 - **Server:** Uvicorn
 
 ---
@@ -38,7 +40,6 @@ voice-ordering-app/
 │ ├── services/
 │ │ ├── matching_service.py
 │ │ ├── order_service.py
-│ │ └── embedding_service.py
 │ └── main.py
 │
 ├── data/
@@ -47,8 +48,9 @@ voice-ordering-app/
 ├── frontend/
 │ └── index.html
 │
-├── scripts/
-│ └── build_index.py
+├── images/
+│ ├── ui.png
+│ └── output.png
 │
 ├── requirements.txt
 └── README.md
@@ -61,22 +63,23 @@ voice-ordering-app/
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/Ruchi-novadule/voice-ordering-ai-app.git 
+git clone https://github.com/your-username/voice-ordering-ai-app.git
 cd voice-ordering-ai-app
 2️⃣ Install Dependencies
 pip install -r requirements.txt
 3️⃣ Run Backend Server
 uvicorn app.main:app --reload
 4️⃣ Run Frontend
-Open frontend/index.html
+Open frontend/index.html in browser
 OR use Live Server in VS Code
 🎯 Usage
-Click Start Speaking
+Click 🎤 Start
 Speak your order:
 
 Example:
 
 I want one burger and two coke
+Click ❌ Stop (optional)
 📊 Output Example
 Matched Items:
 Veggie Burger, Diet Coke
@@ -88,38 +91,42 @@ Diet Coke x2 = ₹100
 Total items: 3
 Total price: ₹200
 🧠 How It Works
-🎤 Speech is captured using Web Speech API
+🎤 Voice input captured via Web Speech API
 📝 Converted to text in real-time
-🔍 Text processed using NLP logic
-🍔 Items matched from menu
-🔢 Quantities extracted using regex
-🧾 Order summary generated
+🔍 Matching logic identifies menu items
+🔢 Quantity extracted using regex
+🧾 Summary generated
 💰 Total price calculated
-🔥 Future Enhancements
-🔊 Voice response (Text-to-Speech)
-📱 Mobile responsive UI
-🧠 ML-based recommendation system
-💳 Payment integration
-🛒 Cart management system
-🌍 Multi-language support
+🎨 UI Highlights
+Modern card-based design
+Gradient background
+Animated buttons
+Loading spinner
+Live listening status indicator
 📸 Screenshots
 
-Add screenshots here (UI + Output)
+(Add later)
 
-![UI Screenshot](images/ui.png)
-![Output Screenshot](images/output.png)
+![UI](images/ui.png)
+![Output](images/output.png)
+🔥 Future Enhancements
+🔊 Voice Output (AI speaks response)
+📱 Mobile Responsive Design
+🧠 AI Recommendation System
+💳 Payment Integration
+🌍 Multi-language Support
 💼 Use Case
 
-This project demonstrates real-world applications of:
+This project demonstrates:
 
-AI in food ordering systems
-Voice-based interfaces
-NLP-based intent recognition
-Automation in restaurants
+Voice-based user interfaces
+NLP-based order processing
+Real-world restaurant automation system
+Full-stack development (Frontend + Backend)
 👩‍💻 Author
 
 Ruchi Tiwari
 
-⭐ Show Your Support
+⭐ Support
 
-If you like this project, please ⭐ the repository and share it!
+If you like this project, give it a ⭐ on GitHub!
