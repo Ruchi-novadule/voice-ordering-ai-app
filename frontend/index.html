@@ -1,22 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Voice Ordering App 🎤</title>
+    <title>Food Ordering App 🍔</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 420px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 8px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .start-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .stop-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .status {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .listening {
+            color: green;
+        }
+
+        .stopped {
+            color: red;
+        }
+
+        .section {
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .box {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 8px;
+            min-height: 40px;
+            white-space: pre-line;
+        }
+
+        .loader {
+            display: none;
+            margin: 10px auto;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
+
 <body>
 
-<h2>🎤 Voice Ordering App</h2>
+<div class="container">
+    <h2>🍔 Food Ordering App</h2>
 
-<button onclick="startListening()">Start Speaking</button>
+    <button class="start-btn" onclick="startListening()">🎤 Start</button>
+    <button class="stop-btn" onclick="stopListening()">❌ Stop</button>
 
-<h3>📝 Your Speech:</h3>
-<p id="output"></p>
+    <div class="status stopped" id="status">🔴 Not Listening</div>
 
-<h3>🍔 Matched Items:</h3>
-<p id="result"></p>
+    <div class="loader" id="loader"></div>
 
-<h3>🧾 Order Summary:</h3>
-<pre id="summary"></pre>
+    <div class="section">
+        <h4>📝 Your Speech:</h4>
+        <div class="box" id="output"></div>
+    </div>
+
+    <div class="section">
+        <h4>🍽️ Matched Items:</h4>
+        <div class="box" id="result"></div>
+    </div>
+
+    <div class="section">
+        <h4>🧾 Order Summary:</h4>
+        <div class="box" id="summary"></div>
+    </div>
+</div>
 
 <script>
 let recognition;
@@ -26,6 +130,9 @@ function startListening() {
 
     recognition.continuous = true;
     recognition.interimResults = true;
+
+    document.getElementById("status").innerText = "🟢 Listening...";
+    document.getElementById("status").className = "status listening";
 
     recognition.onresult = function(event) {
         let transcript = "";
@@ -37,11 +144,25 @@ function startListening() {
         document.getElementById("output").innerText = transcript;
 
         if (event.results[event.results.length - 1].isFinal) {
+            showLoader(true);
             sendToBackend(transcript);
         }
     };
 
     recognition.start();
+}
+
+function stopListening() {
+    if (recognition) {
+        recognition.stop();
+    }
+
+    document.getElementById("status").innerText = "🔴 Stopped";
+    document.getElementById("status").className = "status stopped";
+}
+
+function showLoader(show) {
+    document.getElementById("loader").style.display = show ? "block" : "none";
 }
 
 function sendToBackend(text) {
@@ -55,6 +176,8 @@ function sendToBackend(text) {
     .then(res => res.json())
     .then(data => {
 
+        showLoader(false);
+
         document.getElementById("result").innerText =
             data.matched_items.join(", ");
 
@@ -65,8 +188,8 @@ function sendToBackend(text) {
         document.getElementById("summary").innerText = summaryText;
     })
     .catch(err => {
-        console.error(err);
-        document.getElementById("summary").innerText = "Error connecting to backend";
+        showLoader(false);
+        document.getElementById("summary").innerText = "Error connecting backend";
     });
 }
 </script>
